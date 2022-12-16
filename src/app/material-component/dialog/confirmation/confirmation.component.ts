@@ -1,4 +1,6 @@
-import { Component, EventEmitter, OnInit } from '@angular/core';
+import { Component, EventEmitter, Inject, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { AnyARecord } from 'dns';
 
 @Component({
   selector: 'app-confirmation',
@@ -8,12 +10,19 @@ import { Component, EventEmitter, OnInit } from '@angular/core';
 export class ConfirmationComponent implements OnInit {
 
   onEmitStatusChange = new EventEmitter();
-  deails: any = {
+  details: any = {
     
   }
-  constructor() { }
+  constructor(@Inject(MAT_DIALOG_DATA) public dialogData: any) { }
 
   ngOnInit(): void {
+    if(this.dialogData){
+      this.details = this.dialogData;
+    }
+  }
+
+  handleChangeAction(){
+    this.onEmitStatusChange.emit();
   }
 
 }
