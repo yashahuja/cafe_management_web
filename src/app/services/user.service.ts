@@ -36,4 +36,11 @@ url = environment.apiUrl;
       headers: new HttpHeaders().set('content-type', 'application/json')
     })
   }
+
+  getUsers(){
+    return this.httpClient.get(this.url+'/user/get');
+  }
+  update(data:any){
+    return this.httpClient.patch(this.url+'/user/update', data);
+  }
 }
